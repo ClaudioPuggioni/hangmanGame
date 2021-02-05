@@ -1,6 +1,10 @@
 var readlineSync = require("readline-sync");
 var randomWords = require("random-words");
 
+let wait = () => {
+  console.log(" ");
+};
+
 let asciiMan = (count) => {
   switch (count) {
     case 6:
@@ -64,7 +68,7 @@ let playAgain = () => {
     setTimeout(hangman, 10000);
   } else if (input == "nay" || input == "Nay" || input == "no" || input == "No" || input == "naa" || input == "Naa" || input == "no way" || input == "No way") {
     console.clear();
-    return console.log("\n\n\nSo long now. If you ever want to play again, give me a shout. Good times.\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    return console.log("\n\n\nSo long now. If you ever want to play again, give me a shout. Good times.\n\n\n\n\n\n\n\n\n\n\n\n");
   }
 };
 
@@ -102,11 +106,10 @@ let guessRecursion = (guessesLeft, score, secretWord) => {
       console.log("Well, still a nice day I guess. Congratulations! You win. He lives. But if you don't feel like taking him to the hospital let me know.");
       return playAgain();
     }
-
     guessRecursion(guessCount, score, secretWord);
   } else {
     if (guessCount > 1) {
-      console.log("\nHah! What's another one thrown away- still a nice day.\n");
+      console.log("\nHah! What's another chance thrown away- still a nice day.\n");
     }
     guessCount--;
     guessRecursion(guessCount, score, secretWord);
@@ -140,10 +143,9 @@ let hangman = () => {
     if (score.includes(String.fromCharCode(95))) {
       console.log("\nGOOD GUESS! I guess there's hope for him after all.\n");
     }
-
     guessRecursion(guessCount, score, secretWord);
   } else {
-    console.log("\nHah! What's one thrown away. It's still a nice day.\n");
+    console.log("\nHah! What's one chance thrown away. It's still a nice day.\n");
     guessCount--;
     guessRecursion(guessCount, score, secretWord);
   }
@@ -167,7 +169,7 @@ let gameInit = () => {
     welcome == "if i have to"
   ) {
     console.log("\nMost good, let us begin. Now, let me just grab my rope...");
-    hangman();
+    setTimeout(hangman, 3000);
   } else if (welcome == "nay" || welcome == "Nay" || welcome == "no" || welcome == "No" || welcome == "naa" || welcome == "Naa" || welcome == "no way" || welcome == "No way") {
     console.log("Alright, I guess I'll let him go. Goodbye.\n");
   }
