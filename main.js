@@ -56,20 +56,25 @@ let playAgain = () => {
     input == "If I have to" ||
     input == "if i have to"
   ) {
-    console.log("Alright! Let me just grab another dude, one sec.");
-    hangman();
+    console.clear();
+    console.log("Alright! Let me just grab another dude, one sec.\n");
+    console.log("[Off in the distance you overhear...]");
+    console.log('"Hey! YOU! Yeah, you! Come and play a game with us! Great! Put this bag over your head and we can start."');
+    setTimeout(hangman, 10000);
   } else if (input == "nay" || input == "Nay" || input == "no" || input == "No" || input == "naa" || input == "Naa" || input == "no way" || input == "No way") {
-    return console.log("So long now. If you ever want to play again, give me a shout. Good times.");
+    console.clear();
+    return console.log("So long now. If you ever want to play again, give me a shout. Good times.\n\n\n\n\n\n\n");
   }
 };
 
 let guessRecursion = (guessesLeft, score, secretWord) => {
+  console.clear();
   let guess;
   let guessCount = guessesLeft;
   if (guessCount == 0) {
     asciiMan(guessCount);
     console.log("Ee's dead. Worm food. Going to miss him. At least it's still a nice day.\n" + "Answer was " + secretWord.join("") + ".");
-    playAgain();
+    return playAgain();
   }
   asciiMan(guessCount);
   console.log(score.join(" "));
@@ -81,18 +86,20 @@ let guessRecursion = (guessesLeft, score, secretWord) => {
   }
 
   if (secretWord.includes(guess)) {
-    console.log("\nGOOD GUESS! I guess there's hope for him after all.\n");
-
     for (let index = 0; index < secretWord.length; index++) {
       if (secretWord[index] === guess) {
         score[index] = guess;
       }
     }
 
+    if (score.includes(String.fromCharCode(95))) {
+      console.log("\nGOOD GUESS! I guess there's hope for him after all.\n");
+    }
+
     if (!score.includes(String.fromCharCode(95))) {
       console.log("Ahh, shucks. You got it. The word is " + secretWord.join("") + ".");
       console.log("Well, still a nice day I guess. Congratulations! You win. He lives. But if you don't feel like taking him to the hospital let me know.");
-      playAgain();
+      return playAgain();
     }
 
     guessRecursion(guessCount, score, secretWord);
@@ -116,19 +123,23 @@ let hangman = () => {
   }
 
   console.log("You have 2 chances to save this man. Let me loosen this a bit- 6 chances to save this man.\n");
+  console.clear();
 
   asciiMan(guessCount);
   console.log(score.join(" "));
   let guessOne = readlineSync.question("Guess a letter.\n");
 
   if (secretWord.includes(guessOne)) {
-    console.log("\nGOOD GUESS! I guess there's hope for him after all.\n");
-
     for (let index = 0; index < secretWord.length; index++) {
       if (secretWord[index] === guessOne) {
         score[index] = guessOne;
       }
     }
+
+    if (score.includes(String.fromCharCode(95))) {
+      console.log("\nGOOD GUESS! I guess there's hope for him after all.\n");
+    }
+
     guessRecursion(guessCount, score, secretWord);
   } else {
     console.log("\nHah! What's one thrown away. It's still a nice day.\n");
@@ -138,7 +149,8 @@ let hangman = () => {
 };
 
 let gameInit = () => {
-  let welcome = readlineSync.question("Hey, you! Come and save a man from hanging! What say you, yay or nay?\n");
+  console.clear();
+  let welcome = readlineSync.question("Hey, YOU! Yeah, you! Come and save a man from hanging! What say you, yay or nay?\n");
 
   if (
     welcome == "yay" ||
