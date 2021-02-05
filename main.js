@@ -58,7 +58,7 @@ let playAgain = () => {
   ) {
     console.log("Alright! Let me just grab another dude, one sec.");
     hangman();
-  } else if (welcome == "nay" || welcome == "Nay" || welcome == "no" || welcome == "No" || welcome == "naa" || welcome == "Naa" || welcome == "no way" || welcome == "No way") {
+  } else if (input == "nay" || input == "Nay" || input == "no" || input == "No" || input == "naa" || input == "Naa" || input == "no way" || input == "No way") {
     return console.log("So long now. If you ever want to play again, give me a shout. Good times.");
   }
 };
@@ -122,7 +122,7 @@ let hangman = () => {
   let guessOne = readlineSync.question("Guess a letter.\n");
 
   if (secretWord.includes(guessOne)) {
-    console.log("\nGOOD GUESS! I guess there's hope after all.\n");
+    console.log("\nGOOD GUESS! I guess there's hope for him after all.\n");
 
     for (let index = 0; index < secretWord.length; index++) {
       if (secretWord[index] === guessOne) {
