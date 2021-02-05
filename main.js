@@ -39,6 +39,7 @@ let asciiMan = (count) => {
       );
       break;
   }
+  // Note: used website for reference to draw the image (source: https://gieseanw.wordpress.com/2010/03/29/ascii-hangman/)
 };
 
 let playAgain = () => {
