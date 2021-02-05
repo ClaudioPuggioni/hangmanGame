@@ -41,12 +41,35 @@ let asciiMan = (count) => {
   }
 };
 
+let playAgain = () => {
+  let input = readlineSync.question("\nFeel like playing some more?\n");
+  if (
+    input == "yay" ||
+    input == "Yay" ||
+    input == "yes" ||
+    input == "Yes" ||
+    input == "sure" ||
+    input == "Sure" ||
+    input == "why not" ||
+    input == "Why not" ||
+    input == "if I have to" ||
+    input == "If I have to" ||
+    input == "if i have to"
+  ) {
+    console.log("Alright! Let me just grab another dude, one sec.");
+    hangman();
+  } else if (welcome == "nay" || welcome == "Nay" || welcome == "no" || welcome == "No" || welcome == "naa" || welcome == "Naa" || welcome == "no way" || welcome == "No way") {
+    return console.log("So long now. If you ever want to play again, give me a shout. Good times.");
+  }
+};
+
 let guessRecursion = (guessesLeft, score, secretWord) => {
   let guess;
   let guessCount = guessesLeft;
   if (guessCount == 0) {
     asciiMan(guessCount);
-    return console.log("Ee's dead. Worm food. Going to miss him. At least it's still a nice day.\n" + "Answer was " + secretWord.join("") + ".");
+    console.log("Ee's dead. Worm food. Going to miss him. At least it's still a nice day.\n" + "Answer was " + secretWord.join("") + ".");
+    playAgain();
   }
   asciiMan(guessCount);
   console.log(score.join(" "));
@@ -68,7 +91,8 @@ let guessRecursion = (guessesLeft, score, secretWord) => {
 
     if (!score.includes(String.fromCharCode(95))) {
       console.log("Ahh, shucks. You got it. The word is " + secretWord.join("") + ".");
-      return console.log("Well, still a nice day I guess. Congratulations! You win. He lives. But if you don't feel like taking him to the hospital let me know.");
+      console.log("Well, still a nice day I guess. Congratulations! You win. He lives. But if you don't feel like taking him to the hospital let me know.");
+      playAgain();
     }
 
     guessRecursion(guessCount, score, secretWord);
