@@ -4,11 +4,11 @@ var randomWords = require("random-words");
 let guessRecursion = (guessesLeft, score, secretWord) => {
   let guessCount = guessesLeft;
   if (guessCount == 0) {
-    return console.log("Ee's dead. Worm food. Going to miss him. Still a nice day.");
+    return console.log("Ee's dead. Worm food. Going to miss him. At least it's still a nice day.");
   }
 
-  let guess = readlineSync.question("Guess again! You have " + guessCount + " chances left.\n");
   console.log(score.join(" "));
+  let guess = readlineSync.question("Guess again! You have " + guessCount + " chances left.\n");
 
   if (secretWord.includes(guess)) {
     console.log("Good guess! I guess there's hope after all.\n");
@@ -18,10 +18,11 @@ let guessRecursion = (guessesLeft, score, secretWord) => {
         score[index] = guess;
       }
     }
-    console.log(score.join(" "));
     guessRecursion(guessCount, score, secretWord);
   } else {
-    console.log("Hah! What's another one thrown away- still a nice day.");
+    if (guessCount > 1) {
+      console.log("Hah! What's another one thrown away- still a nice day.");
+    }
     guessCount--;
     guessRecursion(guessCount, score, secretWord);
   }
@@ -34,7 +35,7 @@ let hangman = () => {
   let score = [];
 
   for (const letter of secretWord) {
-    score.push("_");
+    score.push(String.fromCharCode(95));
   }
 
   console.log("You have 2 chances to save this man. Let me loosen this a bit- 6 chances to save this man.\n");
@@ -49,7 +50,6 @@ let hangman = () => {
         score[index] = guessOne;
       }
     }
-    console.log(score.join(" "));
     guessRecursion(guessCount, score, secretWord);
   } else {
     console.log("Hah! What's one thrown away. It's still a niceday.");
@@ -61,7 +61,19 @@ let hangman = () => {
 let gameInit = () => {
   let welcome = readlineSync.question("Hey, you! Come and save a man from hanging! What say you, yay or nay?\n");
 
-  if (welcome == "yay" || welcome == "Yay" || welcome == "yes" || welcome == "Yes" || welcome == "sure" || welcome == "Sure" || welcome == "why not" || welcome == "Why not") {
+  if (
+    welcome == "yay" ||
+    welcome == "Yay" ||
+    welcome == "yes" ||
+    welcome == "Yes" ||
+    welcome == "sure" ||
+    welcome == "Sure" ||
+    welcome == "why not" ||
+    welcome == "Why not" ||
+    welcome == "if I have to" ||
+    welcome == "If I have to" ||
+    welcome == "if i have to"
+  ) {
     console.log("Most good, let us begin. Now, let me just grab my rope...\n");
     hangman();
   } else if (welcome == "nay" || welcome == "Nay" || welcome == "no" || welcome == "No" || welcome == "naa" || welcome == "Naa" || welcome == "no way" || welcome == "No way") {
