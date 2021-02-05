@@ -1,13 +1,54 @@
 var readlineSync = require("readline-sync");
 var randomWords = require("random-words");
 
+let asciiMan = (count) => {
+  switch (count) {
+    case 6:
+      console.log(
+        "    ________   \n    |      |    \n    |           \n    |           \n    |           \n    |           \n    |           \n____|___________\n    |         /| \n_____________/ |\n             | | \n_____________|/  \n"
+      );
+      break;
+    case 5:
+      console.log(
+        "    ________   \n    |      |    \n    |      @    \n    |           \n    |           \n    |           \n    |           \n____|___________\n    |         /| \n_____________/ |\n             | | \n_____________|/  \n"
+      );
+      break;
+    case 4:
+      console.log(
+        "    ________   \n    |      |    \n    |      @    \n    |      |    \n    |      |    \n    |           \n    |           \n____|___________\n    |         /| \n_____________/ |\n             | | \n_____________|/  \n"
+      );
+      break;
+    case 3:
+      console.log(
+        "    ________   \n    |      |    \n    |      @    \n    |     /|    \n    |      |    \n    |           \n    |           \n____|___________\n    |         /| \n_____________/ |\n             | | \n_____________|/  \n"
+      );
+      break;
+    case 2:
+      console.log(
+        "    ________   \n    |      |    \n    |      @    \n    |     /|\\   \n    |      |    \n    |           \n    |           \n____|___________\n    |         /| \n_____________/ |\n             | | \n_____________|/  \n"
+      );
+      break;
+    case 1:
+      console.log(
+        "    ________   \n    |      |    \n    |      @    \n    |     /|\\   \n    |      |    \n    |     /     \n    |           \n____|___________\n    |         /| \n_____________/ |\n             | | \n_____________|/  \n"
+      );
+      break;
+    case 0:
+      console.log(
+        "    ________   \n    |      |    \n    |      @    \n    |     /|\\   \n    |      |    \n    |     / \\   \n    |           \n____|___________\n    |         /| \n_____________/ |\n             | | \n_____________|/  \n"
+      );
+      break;
+  }
+};
+
 let guessRecursion = (guessesLeft, score, secretWord) => {
   let guess;
   let guessCount = guessesLeft;
   if (guessCount == 0) {
+    asciiMan(guessCount);
     return console.log("Ee's dead. Worm food. Going to miss him. At least it's still a nice day.\n" + "Answer was " + secretWord.join("") + ".");
   }
-
+  asciiMan(guessCount);
   console.log(score.join(" "));
 
   if (guessCount > 1) {
@@ -17,7 +58,7 @@ let guessRecursion = (guessesLeft, score, secretWord) => {
   }
 
   if (secretWord.includes(guess)) {
-    console.log("\nGood guess! I guess there's hope for him after all.\n");
+    console.log("\nGOOD GUESS! I guess there's hope for him after all.\n");
 
     for (let index = 0; index < secretWord.length; index++) {
       if (secretWord[index] === guess) {
@@ -51,11 +92,13 @@ let hangman = () => {
   }
 
   console.log("You have 2 chances to save this man. Let me loosen this a bit- 6 chances to save this man.\n");
+
+  asciiMan(guessCount);
   console.log(score.join(" "));
   let guessOne = readlineSync.question("Guess a letter.\n");
 
   if (secretWord.includes(guessOne)) {
-    console.log("\nGood guess! I guess there's hope after all.\n");
+    console.log("\nGOOD GUESS! I guess there's hope after all.\n");
 
     for (let index = 0; index < secretWord.length; index++) {
       if (secretWord[index] === guessOne) {
