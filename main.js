@@ -63,7 +63,7 @@ let playAgain = () => {
     setTimeout(hangman, 10000);
   } else if (input == "nay" || input == "Nay" || input == "no" || input == "No" || input == "naa" || input == "Naa" || input == "no way" || input == "No way") {
     console.clear();
-    return console.log("So long now. If you ever want to play again, give me a shout. Good times.\n\n\n\n\n\n\n");
+    return console.log("\n\n\nSo long now. If you ever want to play again, give me a shout. Good times.\n\n\n\n\n\n\n\n\n\n\n\n\n");
   }
 };
 
